@@ -443,37 +443,16 @@ function getRandomQuestions() {
     let selectedQuestions = [];
     let totalPoints = 0;
 
-    // Combine all question pools
-    let allQuestions = [...crossroadsQuestions, ...signsQuestions, ...generalQuestions, ...generalQuestions2];
+    // Shuffle each category separately
+    let shuffledCrossroads = [...crossroadsQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
+    let shuffledGeneral = [...generalQuestions].sort(() => 0.5 - Math.random()).slice(0, 11);
+    let shuffledGeneral2 = [...generalQuestions2].sort(() => 0.5 - Math.random()).slice(0, 12);
+    let shuffledSigns = [...signsQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
 
-    // Shuffle the question pool
-    allQuestions.sort(() => 0.5 - Math.random());
+    // Combine selected questions
+    selectedQuestions = [...shuffledCrossroads, ...shuffledGeneral, ...shuffledGeneral2, ...shuffledSigns];
 
-    for (let i = 0; i < allQuestions.length; i++) {
-        if (totalPoints + allQuestions[i].points <= 80) {
-            selectedQuestions.push(allQuestions[i]);
-            totalPoints += allQuestions[i].points;
-        }
-        if (totalPoints === 80) break;
-    }
-
-    // If for some reason we didn't hit exactly 80 points (e.g., only high-point questions left), adjust
-    if (totalPoints !== 80) {
-        let remainingQuestions = allQuestions.filter(q => !selectedQuestions.includes(q)).sort(() => 0.5 - Math.random());
-
-        while (totalPoints !== 80) {
-            let lastQuestion = selectedQuestions.pop();
-            totalPoints -= lastQuestion.points;
-
-            let replacement = remainingQuestions.find(q => totalPoints + q.points === 80);
-            if (replacement) {
-                selectedQuestions.push(replacement);
-                totalPoints += replacement.points;
-            }
-        }
-    }
-
-    return selectedQuestions.sort(() => 0.5 - Math.random());
+    return selectedQuestions;
 }
 
 function loadQuestions() {

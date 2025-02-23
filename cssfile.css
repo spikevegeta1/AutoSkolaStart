@@ -69,6 +69,7 @@ h1 {
 .question-step img {
     width: 100%;
     max-width: 350px;
+    max-height: 500px;
     display: block;
     margin: 10px auto;
     border-radius: 5px;
