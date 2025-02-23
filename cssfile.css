@@ -40,14 +40,24 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Question Box Styling */
 .question-step {
-    margin-bottom: 15px;
+    border: 1px solid #ccc;
     padding: 10px;
-    border: 1px solid #ddd;
+    margin: 10px 0;
     border-radius: 5px;
-    background: #f9f9f9;
+    background: white;
+    position: relative;
 }
+
+.question-points {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
 
 /* Question Image */
 .question-step img {
@@ -109,13 +119,20 @@ button.hidden {
     margin-top: 20px;
 }
 
-.correct {
-    background-color: #4CAF50; /* Green for correct */
-    color: white;
+.correct-answer {
+    background: rgba(144, 238, 144, 0.5); /* Light green transparent */
 }
   
-.incorrect {
-    background-color: #f44336; /* Red for incorrect */
-    color: white;
+.incorrect-answer {
+    background: rgba(221, 81, 81, 0.575); /* Light red for incorrect */
 }
-  
+
+.incorrect-answer-label {
+    color: red;
+    font-weight: bold;
+}
+
+.correct-highlight {
+    color: green;
+    font-weight: bold;
+}

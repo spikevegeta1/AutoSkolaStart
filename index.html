@@ -17,16 +17,18 @@
         <h1>Auto Škola 'Start' Test</h1>
         <form id="questionnaire-form">
             <div id="questionnaire"></div>
-
-            <!-- Submit Button -->
-            <button type="button" id="submit-btn">Završi Test</button>
-
-            <!-- Result Section -->
-            <div id="result" class="result-section" style="display: none;">
-                <h2>Test završen!</h2>
-                <p id="result-text"></p>
-                <button onclick="window.location.reload()">Ponovi test</button>
+            <button type="button" id="submit-btn">Zavrsite Test</button>
+        </form>
+        
+        <!-- Result Section -->
+        <div id="result" style="display: none;">
+            <p id="result-text"></p>
+            <div id="review-questions"></div> <!-- This will display all answered questions -->
+            <div class="questionDiv incorrect-answer">
+                <label>Incorrect Answer</label>
             </div>
+            <button id="restart-btn">Ponovite Test</button>
+        </div>        
         </form>
     </div>
 

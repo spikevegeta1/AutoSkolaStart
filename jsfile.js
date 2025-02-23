@@ -453,7 +453,9 @@ function loadQuestions() {
     const questionnaire = document.getElementById("questionnaire");
     questionnaire.innerHTML = "";
 
-    const selectedQuestions = getRandomQuestions();
+    const selectedQuestions = JSON.parse(sessionStorage.getItem("selectedQuestions")) || getRandomQuestions();
+    sessionStorage.setItem("selectedQuestions", JSON.stringify(selectedQuestions)); // Save questions to sessionStorage
+
     selectedQuestions.forEach(q => {
         let questionDiv = document.createElement("div");
         questionDiv.className = "question-step";
@@ -471,11 +473,21 @@ function loadQuestions() {
 
         q.options.forEach(option => {
             let radioContainer = document.createElement("div");
-
             let input = document.createElement("input");
             input.type = "radio";
             input.name = q.id;
             input.value = option;
+
+            let savedAnswers = JSON.parse(sessionStorage.getItem("userAnswers")) || {};
+            if (savedAnswers[q.id] === option) {
+                input.checked = true;
+            }
+
+            input.addEventListener("change", () => {
+                let userAnswers = JSON.parse(sessionStorage.getItem("userAnswers")) || {};
+                userAnswers[q.id] = input.value;
+                sessionStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+            });
 
             let optionLabel = document.createElement("label");
             optionLabel.textContent = option;
@@ -485,6 +497,11 @@ function loadQuestions() {
             questionDiv.appendChild(radioContainer);
         });
 
+        let pointsDisplay = document.createElement("div");
+        pointsDisplay.className = "question-points";
+        pointsDisplay.textContent = `Poeni: ${q.points}`;
+        questionDiv.appendChild(pointsDisplay);
+
         questionnaire.appendChild(questionDiv);
     });
 }
@@ -493,30 +510,77 @@ function showResult() {
     let correctAnswers = 0;
     let totalPoints = 0;
     let formData = new FormData(document.getElementById('questionnaire-form'));
+    let selectedQuestions = JSON.parse(sessionStorage.getItem("selectedQuestions")) || [];
+    
+    const resultContainer = document.getElementById("review-questions");
+    resultContainer.innerHTML = "";
 
-    formData.forEach((value, key) => {
-        let question = [...crossroadsQuestions, ...signsQuestions, ...generalQuestions, ...generalQuestions2].find(q => q.id === key);
-        if (question && value === question.answer) {
+    selectedQuestions.forEach(q => {
+        let userAnswer = formData.get(q.id) || "";
+        let questionDiv = document.createElement("div");
+        questionDiv.className = "question-step result-review";
+
+        if (q.image) {
+            let img = document.createElement("img");
+            img.src = q.image;
+            img.alt = "Question Image";
+            questionDiv.appendChild(img);
+        }
+
+        let label = document.createElement("label");
+        label.textContent = q.text;
+        questionDiv.appendChild(label);
+
+        q.options.forEach(option => {
+            let radioContainer = document.createElement("div");
+            let optionLabel = document.createElement("label");
+            optionLabel.textContent = option;
+
+            if (option === q.answer) {
+                optionLabel.classList.add("correct-highlight");
+            }
+            if (userAnswer === option && option !== q.answer) {
+                optionLabel.classList.add("incorrect-answer-label");
+            }
+            if (userAnswer === q.answer) {
+                questionDiv.classList.add("correct-answer");
+            }
+            if (userAnswer === option && option !== q.answer) {
+                questionDiv.classList.add("incorrect-answer");
+            }
+
+            radioContainer.appendChild(optionLabel);
+            questionDiv.appendChild(radioContainer);
+        });
+
+        let pointsDisplay = document.createElement("div");
+        pointsDisplay.className = "question-points";
+        pointsDisplay.textContent = `Poeni: ${q.points}`;
+        questionDiv.appendChild(pointsDisplay);
+
+        resultContainer.appendChild(questionDiv);
+
+        if (userAnswer === q.answer) {
             correctAnswers++;
-            totalPoints += question.points;
+            totalPoints += q.points;
         }
     });
 
-    document.getElementById("result-text").innerHTML = `Odogovorili ste ${correctAnswers} tacnih odgovora.<br><strong>Poeni: ${totalPoints}/80</strong>`;
+    document.getElementById("result-text").innerHTML = `<center>Odgovorili ste ${correctAnswers} tacnih odgovora.</center><br><strong><center>Poeni: ${totalPoints}/80</center></strong>`;
     document.getElementById("questionnaire").style.display = 'none';
     document.getElementById("result").style.display = 'block';
     document.getElementById("submit-btn").style.display = 'none';
 }
 
+function restartTest() {
+    sessionStorage.removeItem("userAnswers");
+    sessionStorage.removeItem("selectedQuestions");
+    location.reload();
+}
+
 document.getElementById("submit-btn").addEventListener("click", showResult);
+document.getElementById("restart-btn").addEventListener("click", restartTest);
+
 window.onload = function () {
     loadQuestions();
-
-    // Ensure touch compatibility
-    document.getElementById("submit-btn").addEventListener("touchend", function (event) {
-        event.preventDefault();
-        showResult();
-    });
 };
-
-window.onload = loadQuestions;
