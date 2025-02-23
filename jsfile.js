@@ -300,7 +300,7 @@ const generalQuestions = [
     { id: "gq8", text: "Vozač na putu za saobraćaj vozila u oba smjera na kojem postoje najmanje četiri saobraćajne trake:", type: "radio", options: ["mora da koristi desnu kolovoznu traku", "mora da koristi samo desnu saobraćajnu traku", "mora da koristi samo lijevu saobraćajnu traku"], answer: "mora da koristi desnu kolovoznu traku", points: 2 },
     { id: "gq9", text: "Brzina kretanja motornih vozila na putu, pod normalnim uslovima saobraćaja, ne smije da se ograniči saobraćajnim znakom ispod:", type: "radio", options: ["40 km/h", "50 km/h", "60 km/h"], answer: "40 km/h", points: 3 },
     { id: "gq10", text: "Na putu na kojem postoje dvije saobraćajne trake namijenjene za saobraćaj vozila u istom smjeru, brže kretanje vozila u jednoj traci od kretanja vozila u drugoj traci:", type: "radio", options: ["smatra se preticanjem", "ne smatra se preticanjem", "smatra se obilaženjem"], answer: "ne smatra se preticanjem", points: 2 },
-    { id: "gq11", text: "Vozilo na motorni pogon koje na putu vuče neispravno vozilo ne smije se kretati brzinom većom od:", type: "radio", options: ["40 km/h", "50 km/h", "60 km/h"], answer: "ne smatra se preticanjem", points: 2 },
+    { id: "gq11", text: "Vozilo na motorni pogon koje na putu vuče neispravno vozilo ne smije se kretati brzinom većom od:", type: "radio", options: ["40 km/h", "50 km/h", "60 km/h"], answer: "40 km/h", points: 2 },
     { id: "gq12", text: "Saobraćajnu traku namijenjenu za kretanje vozila za javni prevoz putnika, mogu koristiti:", type: "radio", options: ["vozila pod pratnjom", "vozila komunalne službe", "putnička vozila"], answer: "vozila pod pratnjom", points: 2 },
     { id: "gq13", text: "Vozač je dužan da zvučni znak upozorenja daje:", type: "radio", options: ["više puta u naizmjeničnim intervalima", "bez prekida u trajanju od 5 sekundi", "u mjeri koja je dovoljna da se drugi učesnici u saobraćaju upozore"], answer: "u mjeri koja je dovoljna da se drugi učesnici u saobraćaju upozore", points: 3 },
     { id: "gq14", text: "Zvučni znak upozorenja vozač je dužan da upotrijebi na javnom putu:", type: "radio", options: ["pri sustizanju vozila koja se sporo kreću niz nagib", "kada se obilazi vozilo parkirano sa desne strane kolovoza", "kada se pored kolovoza nalaze djeca koja ne obraćaju pažnju na kretanje vozača"], answer: "kada se pored kolovoza nalaze djeca koja ne obraćaju pažnju na kretanje vozača", points: 2 },
@@ -440,13 +440,40 @@ const generalQuestions2 = [
 
 // Function to get fixed number of questions from each pool while maintaining 80 points total
 function getRandomQuestions() {
-    let selectedCrossroads = [...crossroadsQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
-    let selectedSigns = [...signsQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
-    
-    let selectedGeneral1 = [...generalQuestions].sort(() => 0.5 - Math.random()).slice(0, 11);
-    let selectedGeneral2 = [...generalQuestions2].sort(() => 0.5 - Math.random()).slice(0, 12);
-    
-    return [...selectedCrossroads, ...selectedSigns, ...selectedGeneral1, ...selectedGeneral2].sort(() => 0.5 - Math.random());
+    let selectedQuestions = [];
+    let totalPoints = 0;
+
+    // Combine all question pools
+    let allQuestions = [...crossroadsQuestions, ...signsQuestions, ...generalQuestions, ...generalQuestions2];
+
+    // Shuffle the question pool
+    allQuestions.sort(() => 0.5 - Math.random());
+
+    for (let i = 0; i < allQuestions.length; i++) {
+        if (totalPoints + allQuestions[i].points <= 80) {
+            selectedQuestions.push(allQuestions[i]);
+            totalPoints += allQuestions[i].points;
+        }
+        if (totalPoints === 80) break;
+    }
+
+    // If for some reason we didn't hit exactly 80 points (e.g., only high-point questions left), adjust
+    if (totalPoints !== 80) {
+        let remainingQuestions = allQuestions.filter(q => !selectedQuestions.includes(q)).sort(() => 0.5 - Math.random());
+
+        while (totalPoints !== 80) {
+            let lastQuestion = selectedQuestions.pop();
+            totalPoints -= lastQuestion.points;
+
+            let replacement = remainingQuestions.find(q => totalPoints + q.points === 80);
+            if (replacement) {
+                selectedQuestions.push(replacement);
+                totalPoints += replacement.points;
+            }
+        }
+    }
+
+    return selectedQuestions.sort(() => 0.5 - Math.random());
 }
 
 function loadQuestions() {
