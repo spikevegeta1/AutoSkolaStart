@@ -47,6 +47,9 @@ h1 {
     border-radius: 5px;
     background: white;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .question-points {
@@ -56,6 +59,9 @@ h1 {
     font-size: 14px;
     font-weight: bold;
     color: #555;
+    background: white;
+    padding: 2px 5px;
+    border-radius: 3px;
 }
 
 
@@ -74,6 +80,11 @@ h1 {
     align-items: center;
     gap: 8px;
     margin-bottom: 5px;
+}
+
+.question-step label {
+    display: block;
+    padding-right: 50px;
 }
 
 /* Input Styles */

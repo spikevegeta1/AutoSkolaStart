@@ -558,22 +558,18 @@ function showResult() {
         label.textContent = q.text;
         questionDiv.appendChild(label);
 
+        let userGotItRight = userAnswer === q.answer;
+
         q.options.forEach(option => {
             let radioContainer = document.createElement("div");
             let optionLabel = document.createElement("label");
             optionLabel.textContent = option;
 
             if (option === q.answer) {
-                optionLabel.classList.add("correct-highlight");
+                optionLabel.classList.add("correct-highlight"); // Highlight correct answer in green
             }
-            if (userAnswer === option && option !== q.answer) {
-                optionLabel.classList.add("incorrect-answer-label");
-            }
-            if (userAnswer === q.answer) {
-                questionDiv.classList.add("correct-answer");
-            }
-            if (userAnswer === option && option !== q.answer) {
-                questionDiv.classList.add("incorrect-answer");
+            if (userAnswer === option && !userGotItRight) {
+                optionLabel.classList.add("incorrect-answer-label"); // Mark wrong selected answer in red
             }
 
             radioContainer.appendChild(optionLabel);
@@ -585,23 +581,28 @@ function showResult() {
         pointsDisplay.textContent = `Poeni: ${q.points}`;
         questionDiv.appendChild(pointsDisplay);
 
-        resultContainer.appendChild(questionDiv);
-
-        if (userAnswer === q.answer) {
+        if (userGotItRight) {
+            questionDiv.classList.add("correct-answer"); // Green background for correct answers
             correctAnswers++;
             totalPoints += q.points;
+        } else {
+            questionDiv.classList.add("incorrect-answer"); // Red background for incorrect answers
         }
+
+        resultContainer.appendChild(questionDiv);
     });
 
-    document.getElementById("result-text").innerHTML = `<center>Odgovorili ste ${correctAnswers} tacnih odgovora.</center><br><strong><center>Poeni: ${totalPoints}/80</center></strong>`;
+    document.getElementById("result-text").innerHTML = `<center>Odgovorili ste ${correctAnswers} tačnih odgovora.</center><br><strong><center>Poeni: ${totalPoints}/80</center></strong>`;
     document.getElementById("questionnaire").style.display = 'none';
     document.getElementById("result").style.display = 'block';
     document.getElementById("submit-btn").style.display = 'none';
+    sessionStorage.setItem("testCompleted", "true");
 }
 
 function restartTest() {
     sessionStorage.removeItem("userAnswers");
     sessionStorage.removeItem("selectedQuestions");
+    sessionStorage.removeItem("testCompleted");
     location.reload();
 }
 
@@ -609,5 +610,9 @@ document.getElementById("submit-btn").addEventListener("click", showResult);
 document.getElementById("restart-btn").addEventListener("click", restartTest);
 
 window.onload = function () {
-    loadQuestions();
+    if (sessionStorage.getItem("testCompleted") === "true") {
+        showResult(); // If test is completed, show results
+    } else {
+        loadQuestions(); // Otherwise, load questions
+    }
 };
