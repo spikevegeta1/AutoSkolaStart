@@ -503,10 +503,16 @@ function loadQuestions() {
             questionDiv.appendChild(radioContainer);
         });
 
+        // Add Points Display BELOW the question text but position it at the bottom-right
+        let pointsContainer = document.createElement("div");
+        pointsContainer.className = "points-container";
+
         let pointsDisplay = document.createElement("div");
         pointsDisplay.className = "question-points";
         pointsDisplay.textContent = `Poeni: ${q.points}`;
-        questionDiv.appendChild(pointsDisplay);
+        
+        pointsContainer.appendChild(pointsDisplay);
+        questionDiv.appendChild(pointsContainer); 
 
         questionnaire.appendChild(questionDiv);
     });
