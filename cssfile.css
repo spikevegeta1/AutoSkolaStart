@@ -150,3 +150,33 @@ button.hidden {
     color: green;
     font-weight: bold;
 }
+
+#timer-display {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+  }
+
+  #time-taken {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #result-text {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }

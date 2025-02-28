@@ -518,6 +518,27 @@ function loadQuestions() {
     });
 }
 
+let startTime = sessionStorage.getItem("startTime");
+
+if (!startTime) {
+    startTime = Date.now();
+    sessionStorage.setItem("startTime", startTime);
+}
+
+function updateTimer() {
+    const now = Date.now();
+    const elapsedTime = Math.floor((now - startTime) / 1000); // Convert to seconds
+
+    const hours = Math.floor(elapsedTime / 3600);
+    const minutes = Math.floor((elapsedTime % 3600) / 60);
+    const seconds = elapsedTime % 60;
+
+    document.getElementById("timer-display").textContent =
+    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+const timerInterval = setInterval(updateTimer, 1000);
+
 function showResult() {
     let correctAnswers = 0;
     let totalPoints = 0;
@@ -575,6 +596,21 @@ function showResult() {
         }
 
         resultContainer.appendChild(questionDiv);
+
+        clearInterval(timerInterval); // Stop the timer
+        const now = Date.now();
+        const elapsedTime = Math.floor((now - startTime) / 1000); // Calculate total time taken
+    
+        const hours = Math.floor(elapsedTime / 3600);
+        const minutes = Math.floor((elapsedTime % 3600) / 60);
+        const seconds = elapsedTime % 60;
+    
+        let timeTaken = `Vreme završetka testa: ${hours}h ${minutes}m ${seconds}s`;
+    
+        document.getElementById("time-taken").textContent = timeTaken;
+    
+        // Store the completed test state
+        sessionStorage.setItem("testCompleted", "true");
     });
 
     document.getElementById("result-text").innerHTML = `<center>Odgovorili ste ${correctAnswers} tačnih odgovora.</center><br><strong><center>Poeni: ${totalPoints}/80</center></strong>`;
@@ -582,22 +618,35 @@ function showResult() {
     document.getElementById("result").style.display = 'block';
     document.getElementById("submit-btn").style.display = 'none';
     sessionStorage.setItem("testCompleted", "true");
+
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
 }
 
 function restartTest() {
     sessionStorage.removeItem("userAnswers");
     sessionStorage.removeItem("selectedQuestions");
     sessionStorage.removeItem("testCompleted");
+    sessionStorage.clear();
+    window.scrollTo(0, 0);
     location.reload();
 }
 
-document.getElementById("submit-btn").addEventListener("click", showResult);
+document.getElementById("submit-btn").addEventListener("click", function() {
+    // Scroll to the top of the page instantly
+    window.scrollTo(0, 0);
+
+    // Call the showResult function
+    showResult();
+});
+
 document.getElementById("restart-btn").addEventListener("click", restartTest);
 
 window.onload = function () {
     if (sessionStorage.getItem("testCompleted") === "true") {
-        showResult(); // If test is completed, show results
+        showResult();
     } else {
-        loadQuestions(); // Otherwise, load questions
+        loadQuestions();
+        updateTimer();
     }
 };
