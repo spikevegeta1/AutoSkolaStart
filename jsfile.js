@@ -438,21 +438,48 @@ const generalQuestions2 = [
 
 ];
 
-// Function to get fixed number of questions from each pool while maintaining 80 points total
 function getRandomQuestions() {
-    let selectedQuestions = [];
-    let totalPoints = 0;
+    const selectedQuestions = [
+        ...shuffleAndSlice(crossroadsQuestions, 10),
+        ...shuffleAndSlice(generalQuestions, 10),
+        ...shuffleAndSlice(generalQuestions2, 10),
+        ...shuffleAndSlice(signsQuestions, 13)
+    ];
 
-    // Shuffle each category separately
-    let shuffledCrossroads = [...crossroadsQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
-    let shuffledGeneral = [...generalQuestions].sort(() => 0.5 - Math.random()).slice(0, 11);
-    let shuffledGeneral2 = [...generalQuestions2].sort(() => 0.5 - Math.random()).slice(0, 12);
-    let shuffledSigns = [...signsQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
+    function shuffleAndSlice(arr, count) {
+        return arr
+            .sort(() => 0.5 - Math.random())
+            .slice(0, count);
+    }
 
-    // Combine selected questions
-    selectedQuestions = [...shuffledCrossroads, ...shuffledGeneral, ...shuffledGeneral2, ...shuffledSigns];
+    return adjustPointsToTotal(selectedQuestions);
+}
 
-    return selectedQuestions;
+function adjustPointsToTotal(questions) {
+    const TARGET_POINTS = 80;
+    let currentTotal = questions.reduce((sum, q) => sum + q.points, 0);
+
+    if (currentTotal === TARGET_POINTS) return questions;
+
+    questions.sort((a, b) => a.points - b.points);
+
+    while (currentTotal !== TARGET_POINTS) {
+        if (currentTotal < TARGET_POINTS) {
+            for (let q of questions) {
+                q.points++;
+                currentTotal++;
+                if (currentTotal === TARGET_POINTS) break;
+            }
+        } else {
+            for (let i = questions.length - 1; i >= 0; i--) {
+                questions[i].points--;
+                currentTotal--;
+                if (currentTotal === TARGET_POINTS) break;
+            }
+        }
+    }
+
+    return questions;
 }
 
 function loadQuestions() {
@@ -572,10 +599,10 @@ function showResult() {
             optionLabel.textContent = option;
 
             if (option === q.answer) {
-                optionLabel.classList.add("correct-highlight"); // Highlight correct answer in green
+                optionLabel.classList.add("correct-highlight");
             }
             if (userAnswer === option && !userGotItRight) {
-                optionLabel.classList.add("incorrect-answer-label"); // Mark wrong selected answer in red
+                optionLabel.classList.add("incorrect-answer-label");
             }
 
             radioContainer.appendChild(optionLabel);
@@ -588,18 +615,18 @@ function showResult() {
         questionDiv.appendChild(pointsDisplay);
 
         if (userGotItRight) {
-            questionDiv.classList.add("correct-answer"); // Green background for correct answers
+            questionDiv.classList.add("correct-answer");
             correctAnswers++;
             totalPoints += q.points;
         } else {
-            questionDiv.classList.add("incorrect-answer"); // Red background for incorrect answers
+            questionDiv.classList.add("incorrect-answer");
         }
 
         resultContainer.appendChild(questionDiv);
 
-        clearInterval(timerInterval); // Stop the timer
+        clearInterval(timerInterval);
         const now = Date.now();
-        const elapsedTime = Math.floor((now - startTime) / 1000); // Calculate total time taken
+        const elapsedTime = Math.floor((now - startTime) / 1000);
     
         const hours = Math.floor(elapsedTime / 3600);
         const minutes = Math.floor((elapsedTime % 3600) / 60);
@@ -609,11 +636,20 @@ function showResult() {
     
         document.getElementById("time-taken").textContent = timeTaken;
     
-        // Store the completed test state
         sessionStorage.setItem("testCompleted", "true");
     });
 
-    document.getElementById("result-text").innerHTML = `<center>Odgovorili ste ${correctAnswers} tačnih odgovora.</center><br><strong><center>Poeni: ${totalPoints}/80</center></strong>`;
+    // Updated result text with colored pass/fail message
+    let resultMessage = totalPoints >= 63 
+        ? '<span style="color: green;">Položili ste!</span>' 
+        : '<span style="color: red;">Niste položili...</span>';
+    
+    document.getElementById("result-text").innerHTML = `
+        <center>Odgovorili ste ${correctAnswers} tačnih odgovora.</center><br>
+        <strong><center>Poeni: ${totalPoints}/80</center></strong><br>
+        <strong><center>${resultMessage}</center></strong>
+    `;
+
     document.getElementById("questionnaire").style.display = 'none';
     document.getElementById("result").style.display = 'block';
     document.getElementById("submit-btn").style.display = 'none';
