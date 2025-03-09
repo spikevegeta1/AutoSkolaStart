@@ -343,7 +343,7 @@ const generalQuestions = [
     { id: "gq51", text: "Vozač vozila za organizovani prevoz djece kad zaustavi vozilo na kolovozu radi ulaska-izlaska djece mora:", type: "radio", options: ["uključiti lijevi pokazivač pravca", "uključiti sve pokazivače pravca", "uključiti desni pokazivač pravca"], answer: "uključiti sve pokazivače pravca", points: 3 },
     { id: "gq52", text: "Kada vozila na rаskrsnicu dolаze iz suprotnih smjerovа i skreću ulijevo mimoilaze se:", type: "radio", options: ["sa desne strane", "sa lijeve strane", "po dogovoru"], answer: "sa desne strane", points: 2 },
     { id: "gq53", text: "Prilikom uključivanja u saobraćaj vozač je dužan:", type: "radio", options: ["da upotrijebi zvučni znak upozorenja i da uključi odgovarajući pokazivač pravca", "da uključi sve pokazivače pravca", "da se uvjeri da to može učiniti na bezbjedan način i da uključi odgovarajući pokazivač pravca"], answer: "da se uvjeri da to može učiniti na bezbjedan način i da uključi odgovarajući pokazivač pravca", points: 3 },
-    { id: "gq54", text: "Vozilo koje se kreće po šinama postavljenim na sredini kolovoza:", type: "radio", options: ["smije da se pretiče sa desne straneda upotrijebi zvučni znak upozorenja i da uključi odgovarajući pokazivač pravca", "smije da se pretiče sa lijeve strane", "ne smije da se pretiče"], answer: "smije da se pretiče sa desne strane", points: 2 },
+    { id: "gq54", text: "Vozilo koje se kreće po šinama postavljenim na sredini kolovoza:", type: "radio", options: ["smije da se pretiče sa desne strane", "smije da se pretiče sa lijeve strane", "ne smije da se pretiče"], answer: "smije da se pretiče sa desne strane", points: 2 },
     { id: "gq55", text: "Prilikom mimoilaženja sa pješakom, vozač je dužan da:", type: "radio", options: ["drži bezbjedno rastojanje između svog vozila i pješaka", "sirenom upozori pješaka kako bi pješak napustio kolovoz", "ubrza vozilo da se što prije mimoiđe sa pješakom"], answer: "drži bezbjedno rastojanje između svog vozila i pješaka", points: 3 },
     { id: "gq56", text: "Odstojanje između vučnog i vučenog motornog vozila, ako se vuče pomoću krute veze inosi:", type: "radio", options: ["od 3 do 5 metara", "preko 5 metra", "do 3 m"], answer: "do 3 m", points: 2 },
     { id: "gq57", text: "Prolaženje vozilom pored drugog vozila koje se ne pomjera je radnja:", type: "radio", options: ["preticanja", "obilaženja", "prestrojavanja"], answer: "obilaženja", points: 2 },
@@ -678,6 +678,10 @@ document.getElementById("submit-btn").addEventListener("click", function() {
 
 document.getElementById("restart-btn").addEventListener("click", restartTest);
 
+const invalidQuestions = generalQuestions.filter(question => !question.options.includes(question.answer));
+    if (invalidQuestions.length > 0) {
+        console.log("Questions with invalid answers:", invalidQuestions.map(q => q.id));
+    }
 
 window.onload = function () {
      if (sessionStorage.getItem("testCompleted") === "true") {
