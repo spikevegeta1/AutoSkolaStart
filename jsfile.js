@@ -39,7 +39,7 @@ const crossroadsQuestions = [
     { id: "cx37", text: "U situaciji prikazanoj na slici:", type: "radio", options: ["putničko vozilo 1 ima dozvoljen prolaz", "vozila 2, 3 i 4 imaju dozvoljen prolaz", "samo policijsko vozilo 4 ima dozvoljen prolaz"], answer: "putničko vozilo 1 ima dozvoljen prolaz", image: "Images/18.png", points: 3 },
     { id: "cx38", text: "U situaciji prikazanoj na slici policijsko vozilo 4:", type: "radio", options: ["može da nastavi kretanje pravo", "mora da se zaustavi", "može da nastavi kretanje pravo nakon prolaska vozila 1"], answer: "mora da se zaustavi", image: "Images/18.png", points: 4 },
     { id: "cx39", text: "Kako ćete postupiti u situaciji prikazanoj na slici, ako upravljate vozilom 1:", type: "radio", options: ["nakon propuštanja vozila 2 moram skrenuti udesno", "imam prvenstvo prolaza u odnosu na vozilo 2" ,"zaustaviću se ispred raskrsnice i propustiti sva vozila"], answer: "imam prvenstvo prolaza u odnosu na vozilo 2", image: "Images/19.png", points: 3 },
-    { id: "cx40", text: "Obavezan smjer u desno, u situaciji na slici, odnosi se:", type: "radio", options: ["na teretna i priključna vozila", "na sva vozila osim teretna" ,"na teretna vozila"], answer: "imam prvenstvo prolaza u odnosu na vozilo 2", image: "Images/19.png", points: 4 },
+    { id: "cx40", text: "Obavezan smjer u desno, u situaciji na slici, odnosi se:", type: "radio", options: ["na teretna i priključna vozila", "na sva vozila osim teretna" ,"na teretna vozila"], answer: "na teretna vozila", image: "Images/19.png", points: 4 },
     { id: "cx41", text: "Kako ćete postupiti u situaciji prikazanoj na slici:", type: "radio", options: ["nastaviću kretanje pravo kroz raskrsnicu", " zaustaviću se ispred raskrnice i propustiti vozilo 2" ,"zaustaviću se ispred raskrsnice i propustiti vozilo 3"], answer: "nastaviću kretanje pravo kroz raskrsnicu", image: "Images/21.png", points: 3 },
     { id: "cx42", text: "U situaciji prikazanoj na slici redoslijed prolaska vozila kroz raskrsnicu je:", type: "radio", options: ["231", "123" ,"312"], answer: "123", image: "Images/21.png", points: 3 },
     { id: "cx43", text: "Kako ćete postupiti u sitaciji prikazanoj na slici, ako vozila zadržavaju pravac kretanja, a upravljate sa vozilom 2:", type: "radio", options: ["nastaviću kretanje bez propuštanja vozila", "nastaviću kretanje nakon propuštanja samo vozila 3 i 4" ,"nastaviću kretanje uz propuštanje vozila 1"], answer: "nastaviću kretanje bez propuštanja vozila", image: "Images/22.png", points: 4 },
@@ -58,12 +58,12 @@ const crossroadsQuestions = [
     { id: "cx56", text: "U situaciji prikazanoj na slici redoslijed prolaska vozila kojima je dozvoljen prolazak je:", type: "radio", options: ["43", "21" ,"24"], answer: "43", image: "Images/28.png", points: 3 },
     { id: "cx57", text: "U situaciji prikazanoj na slici vozač vozila 1 treba da:", type: "radio", options: ["nastavi kretanje bez propuštanja vozila 2", "se zaustavi i nakon propuštanja vozila 2 nastavi kretanje" ,"se zaustavi i prestroji u desnu saobraćajnu traku"], answer: "se zaustavi i nakon propuštanja vozila 2 nastavi kretanje", image: "Images/29.png", points: 4 },
     { id: "cx58", text: "U situaciji prikazanoj na slici vozač vozila 1 postupiće po:", type: "radio", options: ["pravilu mimoilaženja vozila različitih kategorija", "pravilu propuštanja vozila sa desne strane" ,"vertikalnoj i horizontalnoj saobraćajnoj signalizaciji"], answer: "vertikalnoj i horizontalnoj saobraćajnoj signalizaciji", image: "Images/29.png", points: 3 },
-    { id: "cx59", text: "U situaciji prikazanoj na slici:", type: "radio", options: ["treba da nastavim kretanje ulijevo", " mogu izvršti prestrojavanje u desnu traku" ,"bez prestrojavanja nastaviću kretanje pravo"], answer: "mogu izvršti prestrojavanje u desnu traku", image: "Images/30.png", points: 4 },
+    { id: "cx59", text: "U situaciji prikazanoj na slici:", type: "radio", options: ["treba da nastavim kretanje ulijevo", "mogu izvršti prestrojavanje u desnu traku" ,"bez prestrojavanja nastaviću kretanje pravo"], answer: "mogu izvršti prestrojavanje u desnu traku", image: "Images/30.png", points: 4 },
     { id: "cx60", text: "U prikazanoj situaciji strelice na kolovozu obelježavaju:", type: "radio", options: ["obavezan smjer kretanja ulijevo", "namjenu saobraćajnih traka" ,"obavezan smjer kretanja udesno"], answer: "namjenu saobraćajnih traka", image: "Images/30.png", points: 3 },
     { id: "cx61", text: "U raskrsnici kao na slici:", type: "radio", options: ["nijesam dužan da propustim vozila u kružnom toku", "dužan sam da propustim samo vozila koja mi dolaze sa desne strane" ,"dužan sam da propustim sva vozila koja se kreću u kružnom toku"], answer: "dužan sam da propustim sva vozila koja se kreću u kružnom toku", image: "Images/31.png", points: 4 },
     { id: "cx62", text: "U situaciji prikazanoj na slici teretno vozilo 2:", type: "radio", options: ["propisno skreće udesno putanjom a", "nepropisno skreće udesno" ,"propisno skreće udesno putanjom b"], answer: "nepropisno skreće udesno", image: "Images/31.png", points: 3 },
     { id: "cx63", text: "Kako ćete postupiti u sitaciji prikazanoj na slici:", type: "radio", options: ["zaustaviću se ispred raskrsnice i propustiti vozila 4 i 2", "zaustaviću se ispred raskrsnice i propustiti sva vozila" ,"propisno skreće udesno putanjom b"], answer: "zaustaviću se ispred raskrsnice i propustiti vozila 4 i 2", image: "Images/32.png", points: 4 },
-    { id: "cx64", text: "U situaciji prikazanoj na slici redoslijed prolaska vozila kroz raskrsnicu je:", type: "radio", options: ["1234", "3241" ,"4213"], answer: "nepropisno skreće udesno", image: "Images/32.png", points: 3 },
+    { id: "cx64", text: "U situaciji prikazanoj na slici redoslijed prolaska vozila kroz raskrsnicu je:", type: "radio", options: ["1234", "3241" ,"4213"], answer: "4213", image: "Images/32.png", points: 3 },
     { id: "cx65", text: "Kako ćete postupiti u situaciji prikazanoj na slici:", type: "radio", options: ["propustiću vozilo 2 i nastaviti kretanje ulijevo", "nastaviću kretanje ulijevo ne propuštajući vozilo 2" ,"ubrzaću kretanje vozila i proći ispred vozila"], answer: "propustiću vozilo 2 i nastaviti kretanje ulijevo", image: "Images/33.png", points: 4 },
     { id: "cx66", text: "U situaciji prikazanoj na slici vozilo 2 se kreće:", type: "radio", options: ["propisno putanjom a", "propisno putanjom b" ,"propisno bliže desnoj ivici kolovoza"], answer: "propisno putanjom b", image: "Images/33.png", points: 3 },
     { id: "cx67", text: "Kako ćete postupiti u situaciji prikazanoj na slici:", type: "radio", options: ["nastaviću kretanje pravo kroz raskrsnicu", "zaustaviću se ispred raskrsnice pa nastaviti kretanje pravo" ,"nastaviću kretanje u lijevo kroz raskrsnicu"], answer: "nastaviću kretanje u lijevo kroz raskrsnicu", image: "Images/34.png", points: 4 },
@@ -76,7 +76,7 @@ const crossroadsQuestions = [
     { id: "cx74", text: "U situaciji prikazanoj na slici prolazak vozila kroz raskrsnicu je regulisan:", type: "radio", options: ["vertikalnom saobraćajnom signalizacijom", "prednošću prolaska šinskog vozila" ,"pravilom propuštanja vozila samo sa desne strane"], answer: "vertikalnom saobraćajnom signalizacijom", image: "Images/37.png", points: 3 },
     { id: "cx75", text: "Kako ćete postupiti u situaciji prikazanoj na slici:", type: "radio", options: ["nastaviću kretanje pravo jer imam prvenstvo prolaza", "nastaviću kretanje smanjenom brzinom" ,"zaustaviću se ispred raskrsnice i propustiti vozila iz suprotnog smjera"], answer: "zaustaviću se ispred raskrsnice i propustiti vozila iz suprotnog smjera", image: "Images/38.png", points: 4 },
     { id: "cx76", text: "U situaciji prikazanoj na slici dužni ste da postupate po:", type: "radio", options: ["svjetlosnoj saobraćajnoj signalizaciji", "vertikalnoj saobraćajnoj signalizaciji" ,"pravilu propuštanja vozila sa desne strane"], answer: "vertikalnoj saobraćajnoj signalizaciji", image: "Images/38.png", points: 4 },
-    { id: "cx77", text: "U situaciji prikazanoj na slici redoslijed prolaska vozila kroz raskrsnicu je:", type: "radio", options: ["123", "213" ,"312"], answer: "vertikalnoj saobraćajnoj signalizaciji", image: "Images/39.png", points: 3 },
+    { id: "cx77", text: "U situaciji prikazanoj na slici redoslijed prolaska vozila kroz raskrsnicu je:", type: "radio", options: ["123", "213" ,"312"], answer: "123", image: "Images/39.png", points: 3 },
     { id: "cx78", text: "U raskrsnici sa kružnim tokom saobraćaja, kretanje vozila vrši se:", type: "radio", options: ["u bilo kojem smjeru", "u smjeru kazaljke na satu" ,"u suprotnom smjeru kazaljke na satu"], answer: "u suprotnom smjeru kazaljke na satu", image: "Images/39.png", points: 4 },
     { id: "cx79", text: "Kako ćete postupiti u situaciji prikazanoj na slici:", type: "radio", options: ["zaustaviću se i propustiti vozilo 3", "nastaviću kretanje pravo iza vozila 2" ,"smanjiću brzinu kretanja i propustiti vozilo 3"], answer: "nastaviću kretanje pravo iza vozila 2", image: "Images/40.png", points: 3 },
     { id: "cx80", text: "U situaciji prikazanoj na slici vučno vozilo 3 je tegljač, a vučeno vozilo je:", type: "radio", options: ["prikolica", "laka prikolica" ,"poluprikolica"], answer: "poluprikolica", image: "Images/40.png", points: 4 },
@@ -193,7 +193,7 @@ const signsQuestions = [
     { id: "sg27", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["put sa jednosmjernim saobraćajem za teretna i priključna vozila", "obavezan smjer za vrste vozila koje su date na znaku", "obilaznica za određene vrste vozila"], answer: "obilaznica za određene vrste vozila", image: "Images2/107_2.png", points: 3 },
     { id: "sg28", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["kružni tok saobraćaja", "raskrsnica sa kružnim tokom saobraćaja", "kružna raskrsnica"], answer: "kružna raskrsnica", image: "Images2/108.jpg", points: 2 },
     { id: "sg29", text: "Na slici su prikazani saobraćajni znaci koji označavaju:", type: "radio", options: ["blizinu dionice puta na kojem je snijeg", "blizinu dionice puta na kome se snijeg čisti mašinski", "blizinu dionice puta na kojem je poledica i led"], answer: "blizinu dionice puta na kome se snijeg čisti mašinski", image: "Images2/109.png", points: 3 },
-    { id: "sg30", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["prvenstvo prolaza u odnosu na vozila iz suprotnog smjera", "prvenstvo prolaza za vozila iz suprotnog smjera", "blizinu dionice puta na kojem je poledica i led"], answer: "saobraćaj u oba smjera", image: "Images2/111.jpg", points: 4 },
+    { id: "sg30", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["prvenstvo prolaza u odnosu na vozila iz suprotnog smjera", "prvenstvo prolaza za vozila iz suprotnog smjera", "blizinu dionice puta na kojem je poledica i led"], answer: "prvenstvo prolaza za vozila iz suprotnog smjera", image: "Images2/111.jpg", points: 4 },
     { id: "sg31", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["prestanak najmanje dozvoljene brzine", "prestanak ograničenja brzine", "prestanak brzine koja se preporučuje"], answer: "prestanak najmanje dozvoljene brzine", image: "Images2/112.jpg", points: 3 },
     { id: "sg32", text: "Na slici su prikazani saobraćajni znaci koji označavaju:", type: "radio", options: ["zabrana saobraćaja za motorna vozila čija širina prelazi širinu označenu na znaku", "zabrana saobraćaja za teretna vozila čija dužina prelazi dužinu označenu na znaku", "zabrana saobraćaja za teretna vozila čija širina prelazi širinu označenu na znaku"], answer: "zabrana saobraćaja za teretna vozila čija širina prelazi širinu označenu na znaku", image: "Images2/113.png", points: 3 },
     { id: "sg33", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["zabrana kretanja za pješake po kolovozu", "zabrana saobraćaja za pješake", "zabrana kretanja za pješake po kolovozu van naselja"], answer: "zabrana saobraćaja za pješake", image: "Images2/115.jpg", points: 4 },
@@ -215,7 +215,7 @@ const signsQuestions = [
     { id: "sg49", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["dvostruka opasna krivina ili više uzastopnih krivina od kojih je prva na desno", "dvostruka krivina ili više uzastopnih krivina od kojih je prva na desno", "dvostruka opasna krivina ili više uzastopnih krivina od kojih je prva na lijevo"], answer: "dvostruka opasna krivina ili više uzastopnih krivina od kojih je prva na lijevo", image: "Images2/132.jpg", points: 4 },
     { id: "sg50", text: "Na slici su prikazani saobraćajni znaci koji označavaju:", type: "radio", options: ["najmanje dozvoljenu brzina u dužini puta od 2000 metara", "brzinu koja se preporučuje u dužini puta od 2000 metara", "najmanje dozvoljenu brzinu nakon pređenih 2000 metara"], answer: "najmanje dozvoljenu brzina u dužini puta od 2000 metara", image: "Images2/133.png", points: 3 },
     { id: "sg51", text: "Na slici su prikazani saobraćajni znaci koji označavaju zabranu saobraćaja za motorna vozila koja vuku:", type: "radio", options: ["laku prikolicu u naznačenom vremenu", "poluprikolicu u naznačenom vremenu", "priključno vozilo u naznačenom vremenu"], answer: "priključno vozilo u naznačenom vremenu", image: "Images2/136.png", points: 3 },
-    { id: "sg52", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["obavezan izlaz u slučaju opasnosti", "udaljenost izlaza u slučaju opasnosti", "putokaz za pješake"], answer: "priključno vozilo u naznačenom vremenu", image: "Images2/137.jpg", points: 2 },
+    { id: "sg52", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["obavezan izlaz u slučaju opasnosti", "udaljenost izlaza u slučaju opasnosti", "putokaz za pješake"], answer: "udaljenost izlaza u slučaju opasnosti", image: "Images2/137.jpg", points: 2 },
     { id: "sg53", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["početak saobraćajne trake za spora vozila", "završetak saobraćajne trake za spora vozila", "završetak saobraćajne trake za prinudno zaustavljanje"], answer: "završetak saobraćajne trake za prinudno zaustavljanje", image: "Images2/138.jpg", points: 2 },
     { id: "sg54", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["zabrana saobraćaja za vozila sa ceradom", "nailazak na neravan kolovoz", "zabrana saobraćaja za cistijerne"], answer: "zabrana saobraćaja za cistijerne", image: "Images2/139.jpg", points: 3 },
     { id: "sg55", text: "Na slici je prikazan saobraćajni znak:", type: "radio", options: ["najmanja dozvoljena brzina", "ograničenje brzine", "brzina koja se preporučuje"], answer: "ograničenje brzine", image: "Images2/140.jpg", points: 4 },
@@ -416,7 +416,7 @@ const generalQuestions2 = [
     { id: "q24", text: "Neposredno nakon saobraćaje nezgode, lice koje je učestvovalo u saobraćajnoj nezgodi:", type: "radio", options: ["smije da konzumira alkoholno piće", "smije da konzumira sedative za smirenje", "ne smije da konzumira alkoholno piće"], answer: "ne smije da konzumira alkoholno piće", points: 1 },
     { id: "q25", text: "Ako je lice koje je povrijeđeno u saobraćajnoj nezgodi bez svijesti treba ga:", type: "radio", options: ["postaviti u ležeći položaj na leđa", "postaviti u ležeći položaj na stomak", "postaviti u bočni položaj"], answer: "postaviti u bočni položaj", points: 1 },
     { id: "q26", text: "Pod opremom motornih i priključnih vozila ne smatra se:", type: "radio", options: ["bočni retrovizor", "rezervni točak", "rezervne sijalice"], answer: "bočni retrovizor", points: 1 },
-    { id: "q27", text: "Svjetlost dnevnog svijetla treba da bude:", type: "radio", options: ["žute boje", "plave boje", "bijele boje"], answer: "bočni retrovizor", points: 1 },
+    { id: "q27", text: "Svjetlost dnevnog svijetla treba da bude:", type: "radio", options: ["žute boje", "plave boje", "bijele boje"], answer: "bijele boje", points: 1 },
     { id: "q28", text: "Minimalna dubina šare na gazećoj površini pneumatika za zimsku upotrebu treba da bude:", type: "radio", options: ["2 mm", "4 mm", "1,6 mm"], answer: "4 mm", points: 1 },
     { id: "q29", text: "Broj policije je:", type: "radio", options: ["124", "112", "122"], answer: "122", points: 1 },
     { id: "q30", text: "Kod povrijeđenog lica na ranu se prvo stavlja:", type: "radio", options: ["alkohol", "voda", "sterilna gaza"], answer: "sterilna gaza", points: 1 },
@@ -640,7 +640,7 @@ function showResult() {
     });
 
     // Updated result text with colored pass/fail message
-    let resultMessage = totalPoints >= 63 
+    let resultMessage = totalPoints >= 68
         ? '<span style="color: green;">Položili ste!</span>' 
         : '<span style="color: red;">Niste položili...</span>';
     
@@ -678,11 +678,12 @@ document.getElementById("submit-btn").addEventListener("click", function() {
 
 document.getElementById("restart-btn").addEventListener("click", restartTest);
 
+
 window.onload = function () {
-    if (sessionStorage.getItem("testCompleted") === "true") {
-        showResult();
-    } else {
-        loadQuestions();
-        updateTimer();
-    }
+     if (sessionStorage.getItem("testCompleted") === "true") {
+         showResult();
+     } else {
+         loadQuestions();
+         updateTimer();
+     }
 };
